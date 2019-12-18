@@ -17,7 +17,7 @@ public extension Button {
         let borderColor: UIColor?
     }
 
-    struct Style: Equatable {
+    class Style {
         let bodyColor: UIColor
         let borderWidth: CGFloat
         let borderColor: UIColor?
@@ -95,14 +95,18 @@ public extension Button {
         }
 
         func backgroundColor(forState state: UIControl.State) -> UIColor? {
+            let color: UIColor?
             switch state {
             case .highlighted:
-                return highlightedBodyColor
+                color = highlightedBodyColor
             case .disabled:
-                return disabledBodyColor
+                color = disabledBodyColor
             default:
-                return bodyColor
+                color = bodyColor
             }
+            return color
+
+//            color?.resolvedColor(with: traitCollection)
         }
 
         func borderColor(forState state: UIControl.State) -> CGColor? {
@@ -170,132 +174,88 @@ public extension Button {
 
 // MARK: - Styles
 public extension Button.Style {
-    static let `default` = Button.Style(
+    static var `default` = Button.Style(
+        bodyColor: .bgPrimary,
         borderWidth: 2.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textAction,
-                backgroundColor: .bgPrimary,
-                borderColor: .accentSecondaryBlue
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: nil,
-                backgroundColor: .defaultButtonHighlightedBodyColor,
-                borderColor: .btnPrimary
-            ),
-            .disabled: Button.StateStyle(
-                textColor: .textDisabled,
-                backgroundColor: nil,
-                borderColor: .btnDisabled
-            )
-        ]
+        borderColor: .accentSecondaryBlue,
+        textColor: .textAction,
+        highlightedBodyColor: .defaultButtonHighlightedBodyColor,
+        highlightedBorderColor: .btnPrimary,
+        highlightedTextColor: nil,
+        disabledBodyColor: nil,
+        disabledBorderColor: .btnDisabled,
+        disabledTextColor: .textDisabled
     )
 
     static let callToAction = Button.Style(
+        bodyColor: .btnPrimary,
         borderWidth: 0.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textTertiary,
-                backgroundColor: .btnPrimary,
-                borderColor: nil
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: nil,
-                backgroundColor: .callToActionButtonHighlightedBodyColor,
-                borderColor: nil
-            ),
-            .disabled: Button.StateStyle(
-                textColor: nil,
-                backgroundColor: .btnDisabled,
-                borderColor: nil
-            )
-        ]
+        borderColor: nil,
+        textColor: .textTertiary,
+        highlightedBodyColor: .callToActionButtonHighlightedBodyColor,
+        highlightedBorderColor: nil,
+        highlightedTextColor: nil,
+        disabledBodyColor: .btnDisabled,
+        disabledBorderColor: nil,
+        disabledTextColor: nil
     )
 
     static let destructive = Button.Style(
+        bodyColor: .btnCritical,
         borderWidth: 0.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textTertiary,
-                backgroundColor: .btnCritical,
-                borderColor: nil
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: nil,
-                backgroundColor: .destructiveButtonHighlightedBodyColor,
-                borderColor: nil
-            ),
-            .disabled: Button.StateStyle(
-                textColor: nil,
-                backgroundColor: .btnDisabled,
-                borderColor: nil
-            )
-        ]
+        borderColor: nil,
+        textColor: .textTertiary,
+        highlightedBodyColor: .destructiveButtonHighlightedBodyColor,
+        highlightedBorderColor: nil,
+        highlightedTextColor: nil,
+        disabledBodyColor: .btnDisabled,
+        disabledBorderColor: nil,
+        disabledTextColor: nil
     )
 
     static let flat = Button.Style(
+        bodyColor: .clear,
         borderWidth: 0.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textAction,
-                backgroundColor: .clear,
-                borderColor: nil
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: .flatButtonHighlightedTextColor,
-                backgroundColor: nil,
-                borderColor: nil
-            ),
-            .disabled: Button.StateStyle(
-                textColor: .textDisabled,
-                backgroundColor: nil,
-                borderColor: nil
-            )
-        ]
+        borderColor: nil,
+        textColor: .textAction,
+        highlightedBodyColor: nil,
+        highlightedBorderColor: nil,
+        highlightedTextColor: .flatButtonHighlightedTextColor,
+        disabledBodyColor: nil,
+        disabledBorderColor: nil,
+        disabledTextColor: .textDisabled,
+        margins: UIEdgeInsets(
+            vertical: .mediumSpacing,
+            horizontal: .mediumLargeSpacing
+        )
     )
 
     static let destructiveFlat = Button.Style(
+        bodyColor: .clear,
         borderWidth: 0.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textCritical,
-                backgroundColor: .clear,
-                borderColor: nil
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: .destructiveFlatButtonHighlightedTextColor,
-                backgroundColor: nil,
-                borderColor: nil
-            ),
-            .disabled: Button.StateStyle(
-                textColor: .textDisabled,
-                backgroundColor: nil,
-                borderColor: nil
-            ),
-        ],
+        borderColor: nil,
+        textColor: .textCritical,
+        highlightedBodyColor: nil,
+        highlightedBorderColor: nil,
+        highlightedTextColor: .destructiveFlatButtonHighlightedTextColor,
+        disabledBodyColor: nil,
+        disabledBorderColor: nil,
+        disabledTextColor: .textDisabled,
         smallFont: .detailStrong,
         normalFont: .detailStrong
     )
 
     static let link = Button.Style(
+        bodyColor: .clear,
         borderWidth: 0.0,
-        stateStyles: [
-            .normal: Button.StateStyle(
-                textColor: .textAction,
-                backgroundColor: .clear,
-                borderColor: nil
-            ),
-            .highlighted: Button.StateStyle(
-                textColor: .linkButtonHighlightedTextColor,
-                backgroundColor: nil,
-                borderColor: nil
-            ),
-            .disabled: Button.StateStyle(
-                textColor: .textDisabled,
-                backgroundColor: nil,
-                borderColor: nil
-            ),
-        ],
+        borderColor: nil,
+        textColor: .textAction,
+        highlightedBodyColor: nil,
+        highlightedBorderColor: nil,
+        highlightedTextColor: .linkButtonHighlightedTextColor,
+        disabledBodyColor: nil,
+        disabledBorderColor: nil,
+        disabledTextColor: .textDisabled,
         margins: UIEdgeInsets(
             vertical: .smallSpacing,
             horizontal: 0

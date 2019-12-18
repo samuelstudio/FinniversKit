@@ -72,11 +72,11 @@ public class Button: UIButton {
         titleHeight = title.height(withConstrainedWidth: bounds.width, font: style.font(forSize: size))
         titleWidth = title.width(withConstrainedHeight: bounds.height, font: style.font(forSize: size))
 
-        if style == .link {
-            setAsLink(title: title)
-        } else {
+//        if style == .link {
+//            setAsLink(title: title)
+//        } else {
             super.setTitle(title, for: state)
-        }
+//        }
 
         if state == .normal {
             accessibilityLabel = title
@@ -85,6 +85,11 @@ public class Button: UIButton {
 
     public override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
         assertionFailure("The title color cannot be changed outside the class")
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        backgroundColor = style.bodyColor
     }
 
     // MARK: - Private methods
