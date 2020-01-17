@@ -22,6 +22,7 @@ public enum ComponentDemoViews: String, CaseIterable {
     case bannerTransparencyView
     case checkbox
     case radioButton
+    case recommendationsView
     case roundedImageView
     case loadingIndicator
     case refreshControl
@@ -105,6 +106,8 @@ public enum ComponentDemoViews: String, CaseIterable {
             return DemoViewController<CheckboxDemoView>(dismissType: .dismissButton)
         case .radioButton:
             return DemoViewController<RadioButtonDemoView>(dismissType: .dismissButton)
+        case .recommendationsView:
+            return DemoViewController<RecommendationsViewDemoView>()
         case .roundedImageView:
             return DemoViewController<RoundedImageViewDemoView>()
         case .loadingIndicator:
