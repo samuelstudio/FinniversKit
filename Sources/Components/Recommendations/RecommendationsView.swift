@@ -84,6 +84,7 @@ public final class RecommendationsView: UIView {
         super.init(frame: .zero)
         self.delegate = delegate
         inlineConsentDialogue.delegate = inlineConsentDialogueViewDelegate
+        setup()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +93,21 @@ public final class RecommendationsView: UIView {
 
     deinit {
         keyValueObservation?.invalidate()
+    }
+
+    // MARK: - Overrides
+
+    public override func systemLayoutSizeFitting(
+        _ targetSize: CGSize,
+        withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
+        verticalFittingPriority: UILayoutPriority
+    ) -> CGSize {
+        var height = CGFloat(1000)
+
+        return CGSize(
+            width: targetSize.width,
+            height: height
+        )
     }
 
     // MARK: - Public
