@@ -13,13 +13,8 @@ public class Button: UIButton {
 
     // MARK: - External properties
 
-    public var style: Style {
-        didSet { setup() }
-    }
-
-    public var size: Size {
-        didSet { setup() }
-    }
+    public var style: Style
+    public var size: Size
 
     // MARK: - Initializers
 
@@ -28,7 +23,6 @@ public class Button: UIButton {
         self.size = size
         super.init(frame: .zero)
         translatesAutoresizingMaskIntoConstraints = !withAutoLayout
-        setup()
     }
 
     public required convenience init?(coder aDecoder: NSCoder) {
@@ -85,6 +79,11 @@ public class Button: UIButton {
 
     public override func setTitleColor(_ color: UIColor?, for state: UIControl.State) {
         assertionFailure("The title color cannot be changed outside the class")
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        setup()
     }
 
     // MARK: - Private methods
