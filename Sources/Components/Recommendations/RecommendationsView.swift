@@ -36,7 +36,7 @@ public final class RecommendationsView: UIView {
 
     // MARK: - Subviews
 
-    private let adsGridView: AdsGridView
+    public let adsGridView: AdsGridView
     private lazy var headerView = UIView()
 
     private lazy var inlineConsentDialogue: DialogueView = {
@@ -102,11 +102,9 @@ public final class RecommendationsView: UIView {
         withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
         verticalFittingPriority: UILayoutPriority
     ) -> CGSize {
-        var height = CGFloat(1000)
-
         return CGSize(
             width: targetSize.width,
-            height: height
+            height: CGFloat(500)
         )
     }
 
@@ -185,6 +183,7 @@ public final class RecommendationsView: UIView {
             headerLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: .mediumLargeSpacing),
             headerLabel.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: .mediumLargeSpacing),
             headerLabel.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -.mediumLargeSpacing),
+            headerLabel.heightAnchor.constraint(equalToConstant: 67)
         ])
 
         adsGridView.fillInSuperview()

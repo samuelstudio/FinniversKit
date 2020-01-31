@@ -23,8 +23,8 @@ public class AdsGridViewCell: UICollectionViewCell {
     private static let cornerRadius: CGFloat = 8.0
     private static let imageDescriptionHeight: CGFloat = 35.0
     private static let iconSize: CGFloat = 23.0
-    private static let minImageAspectRatio: CGFloat = 0.75
-    private static let maxImageAspectRatio: CGFloat = 1.5
+    private static let minImageAspectRatio: CGFloat = 1.0
+    private static let maxImageAspectRatio: CGFloat = 1.0
 
     private lazy var imageContentView: UIView = {
         let view = UIView(withAutoLayout: true)

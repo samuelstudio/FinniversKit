@@ -216,7 +216,8 @@ extension AdsGridView: AdsGridViewLayoutDelegate {
     }
 
     func adsGridViewLayout(_ adsGridViewLayout: AdsGridViewLayout, heightForItemWithWidth width: CGFloat, at indexPath: IndexPath) -> CGFloat {
-        return dataSource?.adsGridView(self, heightForItemWithWidth: width, at: indexPath) ?? 0
+        return 250
+//        return dataSource?.adsGridView(self, heightForItemWithWidth: width, at: indexPath) ?? 0
     }
 }
 
